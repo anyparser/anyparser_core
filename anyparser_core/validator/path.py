@@ -16,6 +16,12 @@ async def validate_path(file_paths: Union[str, List[str]]) -> PathValidationResu
     """
     Validates file paths exist and are accessible
     """
+    if not file_paths or (isinstance(file_paths, str) and not file_paths.strip()):
+        return InvalidPathValidationResult(
+            error=FileNotFoundError("No files provided")
+        )
+    
+
     if isinstance(file_paths, (str, Path)):
         files = [file_paths]
     else:

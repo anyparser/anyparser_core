@@ -16,6 +16,7 @@ from .parser import (
 )
 from .validator import validate_and_parse, validate_option, validate_path
 
+__version__ = "1.0.1"
 __all__ = [
     "Anyparser",
     "AnyparserCrawlDirective",

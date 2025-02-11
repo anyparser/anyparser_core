@@ -2,8 +2,9 @@ import http.client
 import json
 import uuid
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, Union, Literal
 from urllib.parse import urljoin, urlparse
+from datetime import datetime
 
 from .form import build_form
 from .options import AnyparserOption
@@ -36,12 +37,13 @@ class AnyparserResultBase:
 class AnyparserCrawlDirectiveBase:
     """Represents Anyparser crawl directive base with type, priority, name, noindex, nofollow, and crawl delay."""
 
-    type: str = field(default="")
+    type: Literal["HTTP Header", "HTML Meta", "Combined"] = field(default="Combined")
     priority: int = field(default=0)
     name: Optional[str] = field(default=None)
     noindex: Optional[bool] = field(default=False)
     nofollow: Optional[bool] = field(default=False)
     crawl_delay: Optional[int] = field(default=None)
+    unavailable_after: Optional[datetime] = field(default=None)
 
 
 @dataclass
@@ -49,9 +51,8 @@ class AnyparserCrawlDirective(AnyparserCrawlDirectiveBase):
     """Represents Anyparser crawl directive with type 'Combined', overriding the name to be None and adding the 'underlying' field."""
 
     underlying: List[AnyparserCrawlDirectiveBase] = field(default_factory=list)
-    type: str = field(default="Combined")
+    type: Literal["Combined"] = field(default="Combined")
     name: Optional[None] = field(default=None)
-    # name: None = None
 
 
 @dataclass
@@ -74,11 +75,11 @@ class AnyparserUrl:
     politeness_delay: int = field(default=0)
     total_characters: int = field(default=0)
     markdown: str = field(default="")
-
     directive: AnyparserCrawlDirective = field(default_factory=AnyparserCrawlDirective)
     title: Optional[str] = field(default=None)
     crawled_at: Optional[str] = field(default=None)
-
+    images: List[AnyparserImageReference] = field(default_factory=list)
+    text: Optional[str] = field(default=None)
 
 @dataclass
 class AnyparserPdfPage:
@@ -111,11 +112,11 @@ class AnyparserCrawlResult:
     robots_directive: AnyparserRobotsTxtDirective
 
 
-AnyparserResult = Union[AnyparserPdfResult, AnyparserCrawlResult]
+AnyparserResult = Union[AnyparserPdfResult, AnyparserCrawlResult, AnyparserResultBase]
 
 
 class Anyparser:
-    """Main class for parsing itemss using the AnyParser API."""
+    """Main class for parsing itemss using the Anyparser API."""
 
     def __init__(self, options: Optional[AnyparserOption] = None) -> None:
         """Initialize the parser with optional configuration.
@@ -128,7 +129,7 @@ class Anyparser:
     async def parse(
         self, file_paths_or_url: Union[str, List[str]]
     ) -> Union[List[AnyparserResult], str]:
-        """Parse files using the AnyParser API.
+        """Parse files using the Anyparser API.
 
         Args:
             file_paths_or_url: A single file path or list of file paths to parse, or a start URL for crawling

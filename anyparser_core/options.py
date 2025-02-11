@@ -1,5 +1,5 @@
 """
-Options module for AnyParser configuration and parsing.
+Options module for Anyparser configuration and parsing.
 """
 
 from dataclasses import dataclass, field
@@ -15,7 +15,7 @@ AnyparserEncodingType = Literal["utf-8", "latin1"]
 
 @dataclass
 class AnyparserOption:
-    """Configuration options for the AnyParser API."""
+    """Configuration options for the Anyparser API."""
 
     api_url: Optional[str] = None
     api_key: Optional[str] = None

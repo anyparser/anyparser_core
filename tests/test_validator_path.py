@@ -87,3 +87,28 @@ async def test_validate_path_mixed_files(tmp_path):
     assert isinstance(result.error, FileNotFoundError)
     assert "File does not exist: nonexistent.txt" in str(result.error)
     assert result.valid is False
+
+
+@pytest.mark.asyncio
+async def test_validate_path_empty():
+    """Test validation with empty or whitespace file paths"""
+    # Test empty string
+    result = await validate_path("")
+    assert isinstance(result, InvalidPathValidationResult)
+    assert isinstance(result.error, FileNotFoundError)
+    assert "No files provided" in str(result.error)
+    assert result.valid is False
+
+    # Test whitespace string
+    result = await validate_path("   ")
+    assert isinstance(result, InvalidPathValidationResult)
+    assert isinstance(result.error, FileNotFoundError)
+    assert "No files provided" in str(result.error)
+    assert result.valid is False
+
+    # Test empty list
+    result = await validate_path([])
+    assert isinstance(result, InvalidPathValidationResult)
+    assert isinstance(result.error, FileNotFoundError)
+    assert "No files provided" in str(result.error)
+    assert result.valid is False
