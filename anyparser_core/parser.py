@@ -10,7 +10,7 @@ from .form import build_form
 from .options import AnyparserOption
 from .request import async_request
 from .validator import validate_and_parse
-
+from .version import __version__
 
 @dataclass
 class AnyparserImageReference:
@@ -152,7 +152,8 @@ class Anyparser:
 
         # Set up the headers, using the same boundary
         headers: Dict[str, str] = {
-            "Content-Type": f"multipart/form-data; boundary={boundary}"
+            "Content-Type": f"multipart/form-data; boundary={boundary}",
+            "User-Agent": f"anyparser_core@{__version__}"
         }
 
         if parsed.api_key:
