@@ -106,7 +106,7 @@ import os
 import asyncio
 import sys
 
-from anyparser_core import Anyparser, AnyparserOption, OcrLanguage, OCRPreset
+from anyparser_core import Anyparser, AnyparserOption, OcrLanguage, OcrPreset
 
 single_file = "docs/document.png"
 
@@ -116,7 +116,7 @@ options = AnyparserOption(
     model="ocr",
     format="markdown",
     ocr_language=[OcrLanguage.JAPANESE],
-    ocr_preset=OCRPreset.SCAN,
+    ocr_preset=OcrPreset.SCAN,
 )
 
 parser = Anyparser(options)
@@ -226,7 +226,7 @@ The `Anyparser` class utilizes the `AnyparserOption` dataclass for flexible conf
 from dataclasses import dataclass
 from typing import List, Literal, Optional, Union
 
-from anyparser_core import OcrLanguage, OCRPreset
+from anyparser_core import OcrLanguage, OcrPreset
 
 @dataclass
 class AnyparserOption:
@@ -255,7 +255,7 @@ class AnyparserOption:
     
     # OCR Configuration
     ocr_language: Optional[List[OcrLanguage]] = None  # Languages for OCR processing
-    ocr_preset: Optional[OCRPreset] = None  # Preset configuration for OCR
+    ocr_preset: Optional[OcrPreset] = None  # Preset configuration for OCR
     
     # Crawler Configuration
     max_depth: Optional[int] = None  # Maximum crawl depth
@@ -278,7 +278,7 @@ class AnyparserOption:
 | `files` | `Optional[Union[str, List[str]]]` | `None` | Input files to process |
 | `url` | `Optional[str]` | `None` | URL for crawler model |
 | `ocr_language` | `Optional[List[OcrLanguage]]` | `None` | Languages for OCR processing |
-| `ocr_preset` | `Optional[OCRPreset]` | `None` | Preset configuration for OCR |
+| `ocr_preset` | `Optional[OcrPreset]` | `None` | Preset configuration for OCR |
 | `max_depth` | `Optional[int]` | `None` | Maximum crawl depth for crawler model |
 | `max_executions` | `Optional[int]` | `None` | Maximum number of pages to crawl |
 | `strategy` | `Optional[str]` | `None` | Crawling strategy: `"LIFO"` or `"FIFO"` |
@@ -288,19 +288,19 @@ class AnyparserOption:
 
 The following OCR presets are available for optimized document processing:
 
-- `OCRPreset.DOCUMENT` - General document processing
-- `OCRPreset.HANDWRITING` - Handwritten text recognition
-- `OCRPreset.SCAN` - Scanned document processing
-- `OCRPreset.RECEIPT` - Receipt processing
-- `OCRPreset.MAGAZINE` - Magazine/article processing
-- `OCRPreset.INVOICE` - Invoice processing
-- `OCRPreset.BUSINESS_CARD` - Business card processing
-- `OCRPreset.PASSPORT` - Passport document processing
-- `OCRPreset.DRIVER_LICENSE` - Driver's license processing
-- `OCRPreset.IDENTITY_CARD` - ID card processing
-- `OCRPreset.LICENSE_PLATE` - License plate recognition
-- `OCRPreset.MEDICAL_REPORT` - Medical document processing
-- `OCRPreset.BANK_STATEMENT` - Bank statement processing
+- `OcrPreset.DOCUMENT` - General document processing
+- `OcrPreset.HANDWRITING` - Handwritten text recognition
+- `OcrPreset.SCAN` - Scanned document processing
+- `OcrPreset.RECEIPT` - Receipt processing
+- `OcrPreset.MAGAZINE` - Magazine/article processing
+- `OcrPreset.INVOICE` - Invoice processing
+- `OcrPreset.BUSINESS_CARD` - Business card processing
+- `OcrPreset.PASSPORT` - Passport document processing
+- `OcrPreset.DRIVER_LICENSE` - Driver's license processing
+- `OcrPreset.IDENTITY_CARD` - ID card processing
+- `OcrPreset.LICENSE_PLATE` - License plate recognition
+- `OcrPreset.MEDICAL_REPORT` - Medical document processing
+- `OcrPreset.BANK_STATEMENT` - Bank statement processing
 
 **Model Types for AI Data Pipelines:**
 

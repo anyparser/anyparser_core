@@ -5,7 +5,7 @@ import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from anyparser_core.config.hardcoded import OcrLanguage, OCRPreset
+from anyparser_core.config.hardcoded import OcrLanguage, OcrPreset
 from anyparser_core.validator.option import validate_option
 
 
@@ -41,7 +41,7 @@ def test_validate_option_valid_options():
         "api_url": "https://api.example.com",
         "api_key": "test-key",
         "ocr_language": [OcrLanguage.ENGLISH, OcrLanguage.SPANISH],
-        "ocr_preset": OCRPreset.DOCUMENT,
+        "ocr_preset": OcrPreset.DOCUMENT,
     }
 
     # Should not raise any exceptions

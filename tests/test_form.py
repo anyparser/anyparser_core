@@ -5,7 +5,7 @@ import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from anyparser_core import OcrLanguage, OCRPreset
+from anyparser_core import OcrLanguage, OcrPreset
 from anyparser_core.form import build_form
 from anyparser_core.options import AnyparserParsedOption, UploadedFile
 
@@ -55,15 +55,15 @@ def test_build_form_with_ocr_options(basic_parsed_option):
     """Test form building with OCR options"""
     basic_parsed_option.model = "ocr"
     basic_parsed_option.ocr_language = [OcrLanguage.ENGLISH, OcrLanguage.SPANISH]
-    basic_parsed_option.ocr_preset = OCRPreset.DOCUMENT
+    basic_parsed_option.ocr_preset = OcrPreset.DOCUMENT
 
     boundary = "boundary123"
     form_data = build_form(basic_parsed_option, boundary)
     form_str = form_data.decode("utf-8")
 
-    assert 'Content-Disposition: form-data; name="ocrLanguage"' in form_str
+    assert 'Content-Disposition: form-data; name="ocr_language"' in form_str
     assert "eng,spa" in form_str
-    assert 'Content-Disposition: form-data; name="ocrPreset"' in form_str
+    assert 'Content-Disposition: form-data; name="ocr_preset"' in form_str
     assert "document" in form_str
 
 
@@ -132,12 +132,12 @@ def test_build_form_ocr():
         format="json",
         model="ocr",
         ocr_language=[OcrLanguage.JAPANESE],
-        ocr_preset=OCRPreset.SCAN,
+        ocr_preset=OcrPreset.SCAN,
         files=[],
     )
     form_data = build_form(option, "boundary")
-    assert b'name="ocrLanguage"' in form_data
-    assert b'name="ocrPreset"' in form_data
+    assert b'name="ocr_language"' in form_data
+    assert b'name="ocr_preset"' in form_data
 
 
 def test_build_form_crawler():
@@ -155,10 +155,10 @@ def test_build_form_crawler():
     )
     form_data = build_form(option, "boundary")
     assert b'name="url"' in form_data
-    assert b'name="maxDepth"' in form_data
-    assert b'name="maxExecutions"' in form_data
+    assert b'name="max_depth"' in form_data
+    assert b'name="max_executions"' in form_data
     assert b'name="strategy"' in form_data
-    assert b'name="traversalScope"' in form_data
+    assert b'name="traversal_scope"' in form_data
 
 
 def test_build_form_with_files(tmp_path):

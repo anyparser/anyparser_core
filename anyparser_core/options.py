@@ -5,7 +5,7 @@ Options module for Anyparser configuration and parsing.
 from dataclasses import dataclass, field
 from typing import List, Literal, Optional, TypedDict, Union
 
-from anyparser_core.config.hardcoded import OcrLanguage, OCRPreset
+from anyparser_core.config.hardcoded import OcrLanguage, OcrPreset
 
 # Type aliases for better readability
 AnyparserFormatType = Literal["json", "markdown", "html"]
@@ -26,7 +26,7 @@ class AnyparserOption:
     table: Optional[bool] = None
     files: Optional[Union[str, List[str]]] = None
     ocr_language: Optional[List[OcrLanguage]] = None
-    ocr_preset: Optional[OCRPreset] = None
+    ocr_preset: Optional[OcrPreset] = None
     url: Optional[str] = None
     max_depth: Optional[int] = None
     max_executions: Optional[int] = None
@@ -54,7 +54,7 @@ class AnyparserParsedOption:
     image: Optional[bool] = None
     table: Optional[bool] = None
     ocr_language: Optional[List[OcrLanguage]] = None
-    ocr_preset: Optional[OCRPreset] = None
+    ocr_preset: Optional[OcrPreset] = None
     url: Optional[str] = None
     max_depth: Optional[int] = None
     max_executions: Optional[int] = None
@@ -72,7 +72,7 @@ class DefaultOptions(TypedDict):
     image: Optional[bool]
     table: Optional[bool]
     ocr_language: Optional[List[OcrLanguage]]
-    ocr_preset: Optional[OCRPreset]
+    ocr_preset: Optional[OcrPreset]
     url: Optional[str]
     max_depth: Optional[int]
     max_executions: Optional[int]

@@ -5,7 +5,7 @@ import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from anyparser_core.config.hardcoded import OcrLanguage, OCRPreset
+from anyparser_core.config.hardcoded import OcrLanguage, OcrPreset
 from anyparser_core.options import (
     AnyparserOption,
     AnyparserParsedOption,
@@ -61,7 +61,7 @@ def test_build_options_with_custom_options(mock_api_key, monkeypatch):
         image=False,
         table=False,
         ocr_language=[OcrLanguage.ENGLISH],
-        ocr_preset=OCRPreset.DOCUMENT,
+        ocr_preset=OcrPreset.DOCUMENT,
     )
 
     options = build_options(custom_options)
@@ -72,7 +72,7 @@ def test_build_options_with_custom_options(mock_api_key, monkeypatch):
     assert options["image"] is False
     assert options["table"] is False
     assert options["ocr_language"] == [OcrLanguage.ENGLISH]
-    assert options["ocr_preset"] == OCRPreset.DOCUMENT
+    assert options["ocr_preset"] == OcrPreset.DOCUMENT
 
 
 def test_anyparser_parsed_file():
@@ -94,7 +94,7 @@ def test_anyparser_parsed_option():
         image=False,
         table=True,
         ocr_language=[OcrLanguage.ENGLISH],
-        ocr_preset=OCRPreset.HANDWRITING,
+        ocr_preset=OcrPreset.HANDWRITING,
     )
 
     assert len(parsed_option.files) == 1
@@ -105,7 +105,7 @@ def test_anyparser_parsed_option():
     assert parsed_option.image is False
     assert parsed_option.table is True
     assert parsed_option.ocr_language == [OcrLanguage.ENGLISH]
-    assert parsed_option.ocr_preset == OCRPreset.HANDWRITING
+    assert parsed_option.ocr_preset == OcrPreset.HANDWRITING
 
 
 def test_anyparser_option_validation():
@@ -117,7 +117,7 @@ def test_anyparser_option_validation():
 
     # Test invalid OCR preset
     with pytest.raises(ValueError):
-        options = build_options(AnyparserOption(ocr_preset=OCRPreset("invalid")))
+        options = build_options(AnyparserOption(ocr_preset=OcrPreset("invalid")))
         validate_option(options)
 
     # Test missing API URL
