@@ -12,6 +12,7 @@ from .request import async_request
 from .validator import validate_and_parse
 from .version import __version__
 
+
 @dataclass
 class AnyparserImageReference:
     """Represents Anyparser image reference with base64 data, display name, page number, and image index."""
@@ -80,6 +81,7 @@ class AnyparserUrl:
     crawled_at: Optional[str] = field(default=None)
     images: List[AnyparserImageReference] = field(default_factory=list)
     text: Optional[str] = field(default=None)
+
 
 @dataclass
 class AnyparserPdfPage:
@@ -153,7 +155,7 @@ class Anyparser:
         # Set up the headers, using the same boundary
         headers: Dict[str, str] = {
             "Content-Type": f"multipart/form-data; boundary={boundary}",
-            "User-Agent": f"anyparser_core@{__version__}"
+            "User-Agent": f"anyparser_core@{__version__}",
         }
 
         if parsed.api_key:
