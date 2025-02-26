@@ -7,7 +7,7 @@ import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from anyparser_core.config.hardcoded import OcrLanguage, OCRPreset
+from anyparser_core.config.hardcoded import OcrLanguage, OcrPreset
 from anyparser_core.options import AnyparserOption, AnyparserParsedOption
 from anyparser_core.validator.main import validate_and_parse
 from anyparser_core.validator.url import InvalidUrlError
@@ -154,13 +154,13 @@ async def test_validate_and_parse_with_ocr_options(
         api_url="https://api.example.com",
         api_key="test-key",
         ocr_language=[OcrLanguage.ENGLISH, OcrLanguage.SPANISH],
-        ocr_preset=OCRPreset.DOCUMENT,
+        ocr_preset=OcrPreset.DOCUMENT,
     )
 
     result = await validate_and_parse(sample_file, options)
 
     assert result.ocr_language == [OcrLanguage.ENGLISH, OcrLanguage.SPANISH]
-    assert result.ocr_preset == OCRPreset.DOCUMENT
+    assert result.ocr_preset == OcrPreset.DOCUMENT
 
 
 @pytest.mark.asyncio

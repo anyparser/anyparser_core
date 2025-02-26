@@ -1,4 +1,4 @@
-from .config.hardcoded import OcrLanguage, OCRPreset
+from .config.hardcoded import OcrLanguage, OcrPreset
 from .form import build_form
 from .options import AnyparserOption, AnyparserParsedOption, UploadedFile
 from .parser import (
@@ -35,6 +35,6 @@ __all__ = [
     "validate_option",
     "build_form",
     "Anyparser",
-    "OCRPreset",
+    "OcrPreset",
     "OcrLanguage",
 ]

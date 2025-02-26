@@ -4,7 +4,7 @@ import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from anyparser_core import Anyparser, AnyparserOption, OcrLanguage, OCRPreset
+from anyparser_core import Anyparser, AnyparserOption, OcrLanguage, OcrPreset
 
 single_file = "docs/document.png"
 
@@ -14,7 +14,7 @@ options = AnyparserOption(
     model="ocr",
     format="markdown",
     ocr_language=[OcrLanguage.JAPANESE],
-    ocr_preset=OCRPreset.SCAN,
+    ocr_preset=OcrPreset.SCAN,
 )
 
 parser = Anyparser(options)

@@ -21,7 +21,7 @@ OCR_PRESETS: Final[List[str]] = [
 ]
 
 
-class OCRPreset(Enum):
+class OcrPreset(Enum):
     """Enumeration of supported OCR presets for document processing."""
 
     DOCUMENT = "document"

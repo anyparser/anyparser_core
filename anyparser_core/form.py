@@ -54,18 +54,18 @@ def build_form(parsed: AnyparserParsedOption, boundary: str) -> bytes:
     if parsed.model == "ocr":
         if parsed.ocr_language:
             add_field(
-                "ocrLanguage", ",".join([lang.value for lang in parsed.ocr_language])
+                "ocr_language", ",".join([lang.value for lang in parsed.ocr_language])
             )
 
         if parsed.ocr_preset:
-            add_field("ocrPreset", parsed.ocr_preset.value)
+            add_field("ocr_preset", parsed.ocr_preset.value)
 
     if parsed.model == "crawler":
         add_field("url", parsed.url)
-        add_field("maxDepth", parsed.max_depth)
-        add_field("maxExecutions", parsed.max_executions)
+        add_field("max_depth", parsed.max_depth)
+        add_field("max_executions", parsed.max_executions)
         add_field("strategy", parsed.strategy)
-        add_field("traversalScope", parsed.traversal_scope)
+        add_field("traversal_scope", parsed.traversal_scope)
     else:
         # Add files to the form
         for file in parsed.files:
